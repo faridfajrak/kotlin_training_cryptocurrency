@@ -9,11 +9,14 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiService{
 
-    @GET("coins/list")
-    suspend fun getCurrencyListAsync() : Response <List<CurrencyModel>>
+    @GET("coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1")
+    suspend fun getCurrencyListAsync(@Query("vs_currency") currency : String,@Query("order") order : String,
+                                     @Query("per_page") perPage : String,@Query("page") page : String
+                                     ) : Response <List<CurrencyModel>>
 
     companion object{
         fun create() : ApiService {

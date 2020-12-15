@@ -18,4 +18,6 @@ class CurrencyListViewModel(val dataRepository: DataRepository) : BaseViewModel(
     var CurrencySearchResult = dataRepository.getCurrencyLists()
 
 
+
+
 }
