@@ -1,4 +1,4 @@
-package com.faridfajrak.kotlin_playground.tools
+package com.faridfajrak.kotlin_playground.repository
 
 import com.faridfajrak.kotlin_playground.BuildConfig
 import com.faridfajrak.kotlin_playground.features.currency_list.CurrencyModel
@@ -12,11 +12,11 @@ import retrofit2.http.GET
 
 interface ApiService{
 
-    @GET("/coins/list")
-    suspend fun getCurrencyList() : Deferred<Response <List<CurrencyModel>>>
+    @GET("coins/list")
+    suspend fun getCurrencyListAsync() : Response <List<CurrencyModel>>
 
     companion object{
-        fun create() : ApiService{
+        fun create() : ApiService {
             val baseUrl = BuildConfig.base_url
             val logger = HttpLoggingInterceptor()
             logger.level = HttpLoggingInterceptor.Level.BASIC

@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 //apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 29
@@ -17,7 +18,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "shared_pref_name", "\"app_shared\"")
-        buildConfigField("String", "base_url", "\"https://api.coingecko.com/api/v3\"")
+        buildConfigField("String", "base_url", "\"https://api.coingecko.com/api/v3/\"")
     }
 //    buildFeatures {
 //        viewBinding true
@@ -62,15 +63,35 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.8.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.8.2'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
-    /**
-     * dagger dependency
-     */
-    implementation 'com.google.dagger:dagger-android:2.28'
-    kapt 'com.google.dagger:dagger-compiler:2.28'
+//    /**
+//     * dagger dependency
+//     */
+//    implementation 'com.google.dagger:dagger-android:2.28'
+//    kapt 'com.google.dagger:dagger-compiler:2.28'
 
     /**
      * work Manger dependency
      */
     implementation "androidx.work:work-runtime-ktx:2.4.0"
 
+    /**
+     * Dagger Hilt dependency
+     */
+
+    def hiltVersion = "2.28-alpha"
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
+
+    // For instrumentation tests
+    androidTestImplementation  "com.google.dagger:hilt-android-testing:$hiltVersion"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hiltVersion"
+
+    // For local unit tests
+    testImplementation "com.google.dagger:hilt-android-testing:$hiltVersion"
+    kaptTest "com.google.dagger:hilt-android-compiler:$hiltVersion"
+
+}
+
+kapt {
+    correctErrorTypes true
 }

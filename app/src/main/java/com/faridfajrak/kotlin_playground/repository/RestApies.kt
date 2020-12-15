@@ -1,20 +1,21 @@
 package com.faridfajrak.kotlin_playground.tools
 
 import com.faridfajrak.kotlin_playground.features.currency_list.CurrencyModel
+import com.faridfajrak.kotlin_playground.repository.ApiService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import retrofit2.http.GET
 import java.lang.Exception
 
 
-fun callGetCurrencyList(
+ fun callGetCurrencyList(
     apiService: ApiService,
     onSuccess: (data: List<CurrencyModel>) -> Unit,
     onError : (error : String, responseCode : Int) -> Unit
 ) {
     GlobalScope.launch {
-        val response = apiService.getCurrencyList().await()
+
         try {
+            val response = apiService.getCurrencyListAsync()
             if (response.isSuccessful) {
                 response.body().let {
                     if (it != null)

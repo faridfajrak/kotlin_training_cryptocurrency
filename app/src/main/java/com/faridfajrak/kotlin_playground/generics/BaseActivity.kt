@@ -12,7 +12,7 @@ abstract class BaseActivity<E : ViewDataBinding, T : BaseViewModel> : AppCompatA
     lateinit var binding : E
     lateinit var viewModel : T
 
-    abstract fun inject()
+//    abstract fun inject()
 
     abstract fun getClassViewModel() : Class<T>
 
@@ -28,7 +28,7 @@ abstract class BaseActivity<E : ViewDataBinding, T : BaseViewModel> : AppCompatA
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        inject()
+//        inject()
 
         binding = DataBindingUtil.setContentView(this,getLayoutId())
 
